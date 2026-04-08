@@ -42,6 +42,8 @@ function setOperator(operator) {
     } else if (expression.length > 0) {
         expression.push(operator);
     }
+    
+    console.log('Current expression:', expression);
 }
 
 function appendNumber(number) {
@@ -73,6 +75,4 @@ function updateDisplay() {
         }
         return item;
     }).join(' ');
-    
-    console.log('Current expression:', expression);
 }
