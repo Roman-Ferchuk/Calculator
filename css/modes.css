@@ -1,0 +1,119 @@
+.mode-module {
+    width: 100%;
+}
+
+.calc-select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    background: var(--btn-bg);
+    border: 1.5px solid var(--btn-border);
+    border-radius: var(--radius-sm);
+    color: var(--text-dark);
+    font-family: inherit;
+    font-weight: 500;
+    outline: none;
+}
+
+.system-indicators {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 15px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: var(--radius-sm);
+}
+
+.sys-item {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-mid);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.sys-item.active {
+    background: var(--btn-border);
+    color: white;
+}
+
+.programmer-grid {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.hex-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.converter-ui {
+    padding-bottom: 10px;
+}
+
+.unit-select {
+    flex: 1; 
+    padding: 12px 10px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--btn-border);
+    background: var(--btn-bg);
+    color: var(--text-dark);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    outline: none;
+    cursor: pointer;
+}
+
+.convert-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+    background: rgba(255,255,255,0.45);
+    border-radius: var(--radius-sm);
+    padding: 10px;
+    border: 1.5px solid var(--btn-border);
+}
+
+.convert-field-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.convert-field-value {
+    flex: 1;
+    text-align: right;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--text-dark);
+    background: white;
+    border-radius: var(--radius-sm);
+    padding: 6px 10px;
+    border: 1px solid var(--btn-border);
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.convert-result {
+    color: var(--text-mid);
+    background: var(--mem-bg);
+}
+
+.convert-divider {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-mid);
+    opacity: 0.6;
+}
+
+.converter-grid {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.converter-grid .btn-zero {
+    grid-column: auto;   
+}
