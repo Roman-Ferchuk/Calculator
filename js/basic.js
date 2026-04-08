@@ -1,7 +1,7 @@
 let expression = [];
 let currentInput = '';
 const display = document.getElementById('display');
-historyDisplay = document.getElementById('history');
+const historyDisplay = document.getElementById('history');
 
 function clearDisplay() {
     currentInput = '';
@@ -63,7 +63,41 @@ function appendDecimal() {
 }
 
 function calculate() {
-    
+    if (currentInput !== '') {
+        expression.push(Number(currentInput));
+        currentInput = '';
+    } else {
+        expression.pop();
+    }
+
+    for (let i = 0; i < expression.length; i++) {
+        if (expression[i] === '*') {
+            expression[i - 1] = expression[i - 1] * expression[i + 1];
+            expression.splice(i, 2);
+            i--;
+        } else if (expression[i] === '÷') {
+            expression[i - 1] = expression[i - 1] / expression[i + 1];
+            expression.splice(i, 2);
+            i--;
+        }
+    }
+
+    for (let i = 0; i < expression.length; i++) {
+        if (expression[i] === '+') {
+            expression[i - 1] = expression[i - 1] + expression[i + 1];
+            expression.splice(i, 2);
+            i--;
+        } else if (expression[i] === '-') {
+            expression[i - 1] = expression[i - 1] - expression[i + 1];
+            expression.splice(i, 2);
+            i--;
+        }
+    }
+
+    console.log('Final result:', expression[0]);
+    currentInput = expression[0].toString();
+    expression = [];
+    updateDisplay();
 }
 
 function updateDisplay() {
