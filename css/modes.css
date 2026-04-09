@@ -47,6 +47,11 @@
     cursor: not-allowed;
 }
 
+.digit-dec:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 .converter-ui {
     padding-bottom: 10px;
 }
