@@ -16,6 +16,12 @@ document.querySelectorAll('.drawer-menu li').forEach((item, index) => {
         document.querySelector('.drawer-menu li.active').classList.remove('active');
         item.classList.add('active');
 
+        display.textContent = '';
+        historyDisplay.textContent = '';
+        expression = [];
+        currentInput = '';
+        shouldResetScreen = false;
+
         const modeName = item.textContent.trim();
         document.querySelector('.calc-mode-label').textContent = modeName;
 
