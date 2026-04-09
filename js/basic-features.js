@@ -10,26 +10,6 @@ function clearDisplay() {
     updateDisplay();
 }
 
-function toggleSign() {
-    if (!(currentInput.charAt(0) === '-')) {
-        currentInput = '-' + currentInput;
-    } else {
-        currentInput = currentInput.substring(1);
-    }
-
-    updateDisplay();
-}
-
-function appendPercent() {
-    if (currentInput === '') return;
-
-    let value = parseFloat(currentInput);
-    
-    currentInput = (value / 100).toString();
-
-    updateDisplay();
-}
-
 function setOperator(operator) {
     if (currentInput !== '') {
         expression.push(Number(currentInput));
@@ -68,6 +48,13 @@ function appendDecimal() {
     updateDisplay();
 }
 
+function backspace() {
+    if (currentInput.length > 0) {
+        currentInput = currentInput.slice(0, currentInput.length - 1);
+        updateDisplay();
+    }
+}
+
 function calculate() {
     if (currentInput !== '') {
         expression.push(Number(currentInput));
@@ -82,6 +69,11 @@ function calculate() {
             expression.splice(i, 2);
             i--;
         } else if (expression[i] === '÷') {
+            if (expression[i + 1] === 0) {
+                alert('Cannot divide by zero!');
+                return;
+            }
+
             expression[i - 1] = expression[i - 1] / expression[i + 1];
             expression.splice(i, 2);
             i--;
