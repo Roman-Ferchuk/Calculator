@@ -1,5 +1,6 @@
 let expression = [];
 let currentInput = '';
+let shouldResetScreen = false;
 const display = document.getElementById('display');
 const historyDisplay = document.getElementById('history');
 
@@ -47,6 +48,11 @@ function setOperator(operator) {
 }
 
 function appendNumber(number) {
+    if (shouldResetScreen) {
+        currentInput = '';
+        shouldResetScreen = false;
+    }
+
     if (currentInput === '0' && number === '0') return;
     if (currentInput === '0' && number !== '0') currentInput = '';
 
@@ -97,6 +103,7 @@ function calculate() {
     console.log('Final result:', expression[0]);
     currentInput = expression[0].toString();
     expression = [];
+    shouldResetScreen = true;
     updateDisplay();
 }
 
