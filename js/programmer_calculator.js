@@ -48,6 +48,13 @@ class ProgrammerCalculator {
         this.updateDisplay(this.currentSystem);
     }
 
+    backspace() {
+        if (this.state.currentInput.length > 0) {
+            this.state.currentInput = this.state.currentInput.slice(0, this.state.currentInput.length - 1);
+            this.updateDisplay(this.currentSystem);
+        }
+    }
+
     appendNumber(number) {
         if (this.shouldResetScreen) {
             this.state.currentInput = '';
@@ -97,7 +104,6 @@ class ProgrammerCalculator {
         if (this.state.currentInput !== '') {
             numericValue = parseInt(this.state.currentInput, oldBase);
         }
-        
         if (isNaN(numericValue)) numericValue = 0;
 
         this.decVal.innerText = numericValue.toString(10);
@@ -108,15 +114,73 @@ class ProgrammerCalculator {
             if (this.state.currentInput !== '') {
                 this.state.currentInput = numericValue.toString(newBase).toUpperCase();
             }
+
+            this.state.expression = this.state.expression.map(item => {
+                if (typeof item === 'number') {
+                    return item; 
+                }
+                return item;
+            });
+
             this.currentSystem = newMode;
         }
 
         this.display.textContent = this.state.currentInput === '' ? '0' : this.state.currentInput;
         
-        this.historyDisplay.textContent = this.state.expression.join(' ');
+        this.historyDisplay.textContent = this.state.expression.map(item => {
+            if (typeof item === 'number') {
+                return item.toString(newBase).toUpperCase();
+            }
+            return item;
+        }).join(' ');
     }
 
     calculate() {
+        const bases = { 'BIN': 2, 'DEC': 10, 'HEX': 16 };
+        const currentBase = bases[this.currentSystem];
 
+        if (this.state.currentInput !== '') {
+            const val = parseInt(this.state.currentInput, currentBase);
+            if (!isNaN(val)) this.state.expression.push(val);
+            this.state.currentInput = '';
+        }
+
+        while (this.state.expression.length > 0 && typeof this.state.expression[this.state.expression.length - 1] === 'string') {
+            this.state.expression.pop();
+        }
+
+        if (this.state.expression.length < 3) return;
+
+        let tempExpr = [...this.state.expression];
+        
+        for (let i = 0; i < tempExpr.length; i++) {
+            if (tempExpr[i] === '×' || tempExpr[i] === '*') {
+                tempExpr[i-1] = tempExpr[i-1] * tempExpr[i+1];
+                tempExpr.splice(i, 2);
+                i--;
+            } else if (tempExpr[i] === '÷' || tempExpr[i] === '/') {
+                if (tempExpr[i+1] === 0) {
+                    alert("Division by zero");
+                    this.clearDisplay();
+                    return;
+                }
+                tempExpr[i-1] = Math.floor(tempExpr[i-1] / tempExpr[i+1]); // Цілочисельне ділення для програмістів
+                tempExpr.splice(i, 2);
+                i--;
+            }
+        }
+
+        let result = tempExpr[0];
+        for (let i = 1; i < tempExpr.length; i += 2) {
+            let operator = tempExpr[i];
+            let nextVal = tempExpr[i+1];
+            if (operator === '+') result += nextVal;
+            if (operator === '-') result -= nextVal;
+        }
+
+        this.state.currentInput = result.toString(currentBase).toUpperCase();
+        this.state.expression = []; 
+        this.shouldResetScreen = true;
+        this.updateDisplay(this.currentSystem);
     }
 }
