@@ -164,7 +164,7 @@ class ProgrammerCalculator {
                     this.clearDisplay();
                     return;
                 }
-                tempExpr[i-1] = Math.floor(tempExpr[i-1] / tempExpr[i+1]); // Цілочисельне ділення для програмістів
+                tempExpr[i-1] = Math.floor(tempExpr[i-1] / tempExpr[i+1]); 
                 tempExpr.splice(i, 2);
                 i--;
             }
@@ -176,6 +176,14 @@ class ProgrammerCalculator {
             let nextVal = tempExpr[i+1];
             if (operator === '+') result += nextVal;
             if (operator === '-') result -= nextVal;
+        }
+
+        const error = this.state.validateResult(result);
+        if (error) {
+            this.state.expression = [];
+            this.state.currentInput = '';
+            this.display.textContent = error;
+            return;
         }
 
         this.state.currentInput = result.toString(currentBase).toUpperCase();
