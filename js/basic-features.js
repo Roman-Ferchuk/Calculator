@@ -101,7 +101,7 @@ function calculate() {
     }
 
     console.log('Final result:', expression[0]);
-    currentInput = expression[0].toString();
+    currentInput = formatResult(expression[0]);
     expression = [];
     shouldResetScreen = true;
     updateDisplay();
@@ -109,6 +109,7 @@ function calculate() {
 
 function updateDisplay() {
     display.textContent = currentInput === '' ? '0' : currentInput;
+    display.scrollLeft = display.scrollWidth;
 
     historyDisplay.textContent = expression.map(item => {
         if (typeof item === 'number' && item < 0) return `(${item})`;
@@ -116,4 +117,12 @@ function updateDisplay() {
         if (item == '/') return '÷';  
         return item;
     }).join(' ');
+}
+
+function formatResult(value) {
+    if (!isFinite(value)) return 'Error';
+    if (Number.isInteger(value)) return value.toString();
+    let formatted = parseFloat(value.toPrecision(10)).toString();
+
+    return formatted;
 }
