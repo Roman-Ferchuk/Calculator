@@ -40,39 +40,39 @@
 
         <div id="standard-module" class="mode-module">
             <div class="buttons-grid">
-                <button class="btn btn-mem" onclick="memoryClear()">MC</button>
-                <button class="btn btn-mem" onclick="memoryRecall()">MR</button>
-                <button class="btn btn-mem" onclick="memoryAdd()">M+</button>
-                <button class="btn btn-mem" onclick="memorySubtract()">M−</button>
+                <button class="btn btn-mem" id="memory-clear" onclick="memoryClear()">MC</button>
+                <button class="btn btn-mem" id="memory-recall" onclick="memoryRecall()">MR</button>
+                <button class="btn btn-mem" id="memory-add" onclick="memoryAdd()">M+</button>
+                <button class="btn btn-mem" id="memory-subtract" onclick="memorySubtract()">M−</button>
 
-                <button class="btn btn-func" onclick="factorial()">x!</button>
-                <button class="btn btn-func" onclick="setOperator('^')">xⁿ</button>
-                <button class="btn btn-func" onclick="square()">x²</button>
-                <button class="btn btn-func" onclick="squareRoot()">√x</button>
+                <button class="btn btn-func" id="factorial">x!</button>
+                <button class="btn btn-func" id="exponent">xⁿ</button>
+                <button class="btn btn-func" id="square">x²</button>
+                <button class="btn btn-func" id="square-root">√x</button>
 
-                <button class="btn btn-action" onclick="clearDisplay()">C</button>
-                <button class="btn btn-action" onclick="backspace()">⌫</button>
-                <button class="btn btn-action" onclick="toggleSign()">+/-</button>
-                <button class="btn btn-action" onclick="appendPercent()">%</button>
+                <button class="btn btn-action" id="clearDisplay">C</button>
+                <button class="btn btn-action" id="backspace">⌫</button>
+                <button class="btn btn-action" id="toggleSign">+/-</button>
+                <button class="btn btn-action" id="appendPercent">%</button>
 
-                <button class="btn" onclick="appendNumber('7')">7</button>
-                <button class="btn" onclick="appendNumber('8')">8</button>
-                <button class="btn" onclick="appendNumber('9')">9</button>
-                <button class="btn btn-operator" onclick="setOperator('÷')">÷</button>
+                <button class="btn btn-number" >7</button>
+                <button class="btn btn-number" >8</button>
+                <button class="btn btn-number" >9</button>
+                <button class="btn btn-operator">÷</button>
 
-                <button class="btn" onclick="appendNumber('4')">4</button>
-                <button class="btn" onclick="appendNumber('5')">5</button>
-                <button class="btn" onclick="appendNumber('6')">6</button>
-                <button class="btn btn-operator" onclick="setOperator('*')">×</button>
+                <button class="btn btn-number" >4</button>
+                <button class="btn btn-number" >5</button>
+                <button class="btn btn-number" >6</button>
+                <button class="btn btn-operator">×</button>
 
-                <button class="btn" onclick="appendNumber('1')">1</button>
-                <button class="btn" onclick="appendNumber('2')">2</button>
-                <button class="btn" onclick="appendNumber('3')">3</button>
-                <button class="btn btn-operator" onclick="setOperator('-')">−</button>
-                <button class="btn" onclick="appendNumber('0')">0</button>
-                <button class="btn" onclick="appendDecimal('.')">.</button>
-                <button class="btn btn-equals" onclick="calculate()">=</button>
-                <button class="btn btn-operator" onclick="setOperator('+')">+</button>
+                <button class="btn btn-number">1</button>
+                <button class="btn btn-number" >2</button>
+                <button class="btn btn-number" >3</button>
+                <button class="btn btn-operator" >−</button>
+                <button class="btn btn-number" >0</button>
+                <button class="btn btn-decimal" >.</button>
+                <button class="btn btn-equals" id="calculate">=</button>
+                <button class="btn btn-operator">+</button>
             </div>
         </div>
 
@@ -134,42 +134,44 @@
                 <div class="sys-item" data-sys="HEX">HEX: <span id="hex-val">0</span></div>
             </div>
             <div class="buttons-grid programmer-grid">
-                <button class="btn btn-func hex-btn" disabled onclick="appendNumber('A')">A</button>
-                <button class="btn btn-func hex-btn" disabled onclick="appendNumber('B')">B</button>
-                <button class="btn btn-func hex-btn" disabled onclick="appendNumber('C')">C</button>
-                <button class="btn btn-operator" onclick="clearDisplay()">C</button>
+                <button class="btn btn-func hex-btn" disabled>A</button>
+                <button class="btn btn-func hex-btn" disabled>B</button>
+                <button class="btn btn-func hex-btn" disabled>C</button>
+                <button class="btn btn-operator" id="clear-display">C</button>
 
-                <button class="btn btn-func hex-btn" disabled onclick="appendNumber('D')">D</button>
-                <button class="btn btn-func hex-btn" disabled onclick="appendNumber('E')">E</button>
-                <button class="btn btn-func hex-btn" disabled onclick="appendNumber('F')">F</button>
-                <button class="btn btn-operator" onclick="backspace()">⌫</button>
+                <button class="btn btn-func hex-btn" disabled>D</button>
+                <button class="btn btn-func hex-btn" disabled>E</button>
+                <button class="btn btn-func hex-btn" disabled>F</button>
+                <button class="btn btn-action" id="backspace">⌫</button>
 
-                <button class="btn digit-dec" onclick="appendNumber('7')">7</button>
-                <button class="btn digit-dec" onclick="appendNumber('8')">8</button>
-                <button class="btn digit-dec" onclick="appendNumber('9')">9</button>
-                <button class="btn btn-operator" onclick="setOperator('/')">÷</button>
+                <button class="btn digit-dec">7</button>
+                <button class="btn digit-dec">8</button>
+                <button class="btn digit-dec">9</button>
+                <button class="btn btn-operator">÷</button>
 
-                <button class="btn digit-dec" onclick="appendNumber('4')">4</button>
-                <button class="btn digit-dec" onclick="appendNumber('5')">5</button>
-                <button class="btn digit-dec" onclick="appendNumber('6')">6</button>
-                <button class="btn btn-operator" onclick="setOperator('*')">×</button>
+                <button class="btn digit-dec">4</button>
+                <button class="btn digit-dec">5</button>
+                <button class="btn digit-dec">6</button>
+                <button class="btn btn-operator">×</button>
 
-                <button class="btn digit-bin" onclick="appendNumber('1')">1</button>
-                <button class="btn digit-dec" onclick="appendNumber('2')">2</button>
-                <button class="btn digit-dec" onclick="appendNumber('3')">3</button>
-                <button class="btn btn-operator" onclick="setOperator('-')">-</button>
+                <button class="btn digit-bin">1</button>
+                <button class="btn digit-dec">2</button>
+                <button class="btn digit-dec">3</button>
+                <button class="btn btn-operator">-</button>
 
-                <button class="btn btn-zero digit-bin" onclick="appendNumber('0')">0</button>
-                <button class="btn btn-operator" onclick="setOperator('+')">+</button>
-                <button class="btn btn-equals" onclick="calculate()">=</button>
+                <button class="btn btn-zero digit-bin">0</button>
+                <button class="btn btn-operator">+</button>
+                <button class="btn btn-equals" id="calculate">=</button>
             </div>
         </div>
     </div>
 
-    <script src="js/basic-features.js"></script>
-    <script src="js/standard.js"></script>
-    <script src="js/navigation.js"></script>
-    <script src="js/programmer.js"></script>
-    <script src="js/memory.js"></script>
+    <script src="js/calculator_engine.js"></script>
+
+    <script src="js/standard_calculator.js"></script>
+    <script src="js/programmer_calculator.js"></script>
+    <script src="js/converter.js"></script>
+
+    <script src="js/main.js"></script>
 </body>
 </html>
