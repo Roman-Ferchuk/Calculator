@@ -111,9 +111,9 @@ function updateDisplay() {
     display.textContent = currentInput === '' ? '0' : currentInput;
 
     historyDisplay.textContent = expression.map(item => {
-        if (typeof item === 'number' && item < 0) {
-            return `(${item})`;
-        }
+        if (typeof item === 'number' && item < 0) return `(${item})`;
+        if (item == '*') return '×';
+        if (item == '/') return '÷';  
         return item;
     }).join(' ');
 }
