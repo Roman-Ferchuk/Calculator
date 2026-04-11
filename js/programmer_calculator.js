@@ -27,18 +27,22 @@ class ProgrammerCalculator {
     }
 
     updateKeypad(mode) {
+        const dotBtn = document.getElementById('prog-decimal');
         if (mode === 'BIN') {
             this.hexButtons.forEach(b => b.disabled = true);
             this.decButtons.forEach(b => b.disabled = true);
             this.binButtons.forEach(b => b.disabled = false); 
+            dotBtn.disabled = true;
         } else if (mode === 'DEC') {
             this.hexButtons.forEach(b => b.disabled = true);
             this.decButtons.forEach(b => b.disabled = false);
             this.binButtons.forEach(b => b.disabled = false); 
+            dotBtn.disabled = false;
         } else if (mode === 'HEX') {
             this.hexButtons.forEach(b => b.disabled = false);
             this.decButtons.forEach(b => b.disabled = false);
             this.binButtons.forEach(b => b.disabled = false);
+            dotBtn.disabled = false;
         }
     }
 
@@ -181,6 +185,13 @@ class ProgrammerCalculator {
         this.state.currentInput = result.toString(currentBase).toUpperCase();
         this.state.expression = []; 
         this.shouldResetScreen = true;
+        this.updateDisplay(this.currentSystem);
+    }
+
+    appendDecimal() {
+        if (this.currentSystem !== 'DEC') return; 
+        if (this.state.currentInput.includes('.')) return;
+        this.state.currentInput += this.state.currentInput === '' ? '0.' : '.';
         this.updateDisplay(this.currentSystem);
     }
 }

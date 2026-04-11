@@ -84,6 +84,9 @@ document.querySelectorAll('.drawer-menu li').forEach((item, index) => {
 
             programmerModule.querySelector('#clear-display').addEventListener('click', () => programmerCalculator.clearDisplay());
             programmerModule.querySelector('#backspace').addEventListener('click', () => programmerCalculator.backspace());
+            programmerModule.querySelector('#prog-decimal').addEventListener('click', () => {
+                programmerCalculator.appendDecimal();
+            });
             programmerModule.querySelector('#calculate').addEventListener('click', () => programmerCalculator.calculate());
         }      
         closeDrawer(); 
