@@ -210,4 +210,60 @@ class ProgrammerCalculator {
         this.state.currentInput += this.state.currentInput === '' ? '0.' : '.';
         this.updateDisplay(this.currentSystem);
     }
+
+    handlePaste(text) {
+        let cleanText = text.trim().toUpperCase();
+        
+        let validPattern;
+        if (this.currentSystem === 'HEX') {
+            validPattern = /^[0-9A-F+\-×÷*/\s()−]+$/;
+        } else if (this.currentSystem === 'BIN') {
+            validPattern = /^[0-1+\-×÷*/\s()−]+$/;
+        } else {
+            validPattern = /^[0-9+\-×÷*/\s()−]+$/;
+        }
+
+        if (!validPattern.test(cleanText)) {
+            alert(`Текст містить символи, недопустимі для режиму ${this.currentSystem}`);
+            return;
+        }
+
+        const tokens = cleanText.split(/([+\-×÷*/−])|(?=[+\-×÷*/−])/).filter(t => t && t.trim() !== '');
+
+        this.state.expression = [];
+        this.state.currentInput = '';
+
+        const radix = this.currentSystem === 'HEX' ? 16 : (this.currentSystem === 'BIN' ? 2 : 10);
+
+        tokens.forEach(token => {
+            token = token.trim();
+            if (/^[0-9A-F]+$/.test(token)) {
+                const num = parseInt(token, radix);
+                this.state.expression.push(num);
+            } else {
+                let op = token.replace('*', '×').replace('/', '÷').replace('-', '−');
+                this.state.expression.push(op);
+            }
+        });
+
+        if (this.state.expression.length > 0 && typeof this.state.expression[this.state.expression.length - 1] === 'number') {
+            const lastNum = this.state.expression.pop();
+            this.state.currentInput = lastNum.toString(radix).toUpperCase();
+        }
+
+        this.updateDisplay(this.currentSystem);
+    }
+
+    copyHistory() {
+        const historyText = this.historyDisplay.textContent;
+        if (historyText) {
+            navigator.clipboard.writeText(historyText)
+                .then(() => {
+                    const originalColor = this.historyDisplay.style.color;
+                    this.historyDisplay.style.color = "#ff99cc"; // "Pick-me" рожевий
+                    setTimeout(() => this.historyDisplay.style.color = originalColor, 500);
+                })
+                .catch(err => console.error('Error copying:', err));
+        }
+    }
 }

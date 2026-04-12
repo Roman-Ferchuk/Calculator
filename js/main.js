@@ -79,6 +79,27 @@ hamburger.addEventListener('click', () => {
 
 overlay.addEventListener('click', closeDrawer);
 
+document.getElementById('copy-history').addEventListener('click', () => {
+    const activeMode = document.querySelector('.drawer-menu li.active').textContent.trim();
+    if (activeMode === 'Standard') {
+        standardCalculator.copyHistory();
+    } else if (activeMode === 'Programmer') {
+        programmerCalculator.copyHistory();
+    }
+});
+
+document.addEventListener('paste', (event) => {
+    const pasteData = (event.clipboardData || window.clipboardData).getData('text');
+    
+    const activeMode = document.querySelector('.drawer-menu li.active').textContent.trim();
+
+    if (activeMode === 'Standard') {
+        standardCalculator.handlePaste(pasteData);
+    } else if (activeMode === 'Programmer') {
+        programmerCalculator.handlePaste(pasteData);
+    }
+});
+
 document.querySelectorAll('.drawer-menu li').forEach((item, index) => {
     item.addEventListener('click', () => {
         document.querySelector('.drawer-menu li.active').classList.remove('active');
