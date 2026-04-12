@@ -179,7 +179,7 @@ class ProgrammerCalculator {
             let operator = tempExpr[i];
             let nextVal = tempExpr[i+1];
             if (operator === '+') result += nextVal;
-            if (operator === '-') result -= nextVal;
+            if (operator === '−' || operator === '-') result -= nextVal;
         }
 
         const error = this.state.validateResult(result);
@@ -196,6 +196,14 @@ class ProgrammerCalculator {
         this.updateDisplay(this.currentSystem);
     }
 
+    reset() {
+        this.state.currentInput = '';
+        this.state.expression = [];
+        this.shouldResetScreen = false;
+        this.updateDisplay(this.currentSystem);
+        this.currentSystem = 'DEC'; 
+    }
+  
     appendDecimal() {
         if (this.currentSystem !== 'DEC') return; 
         if (this.state.currentInput.includes('.')) return;

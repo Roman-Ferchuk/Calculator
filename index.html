@@ -40,10 +40,10 @@
 
         <div id="standard-module" class="mode-module">
             <div class="buttons-grid">
-                <button class="btn btn-mem" id="memory-clear" onclick="memoryClear()">MC</button>
-                <button class="btn btn-mem" id="memory-recall" onclick="memoryRecall()">MR</button>
-                <button class="btn btn-mem" id="memory-add" onclick="memoryAdd()">M+</button>
-                <button class="btn btn-mem" id="memory-subtract" onclick="memorySubtract()">M−</button>
+                <button class="btn btn-mem" id="memory-clear">MC</button>
+                <button class="btn btn-mem" id="memory-recall">MR</button>
+                <button class="btn btn-mem" id="memory-add">M+</button>
+                <button class="btn btn-mem" id="memory-subtract">M−</button>
 
                 <button class="btn btn-func" id="factorial">x!</button>
                 <button class="btn btn-func" id="exponent">xⁿ</button>
@@ -78,7 +78,7 @@
 
         <div id="converter-module" class="mode-module" style="display: none;">
             <div class="converter-ui">
-                <select id="convert-category" class="calc-select" onchange="updateUnits()">
+                <select id="convert-category" class="calc-select">
                     <option value="length">Length</option>
                     <option value="weight">Weight</option>
                     <option value="area">Area</option>
@@ -86,10 +86,8 @@
 
                 <div class="convert-fields">
                     <div class="convert-field-row">
-                        <select id="unit-from" class="unit-select" onchange="convertValue()">
-                            <option value="cm">cm</option>
-                            <option value="m">m</option>
-                            <option value="km">km</option>
+                        <select id="unit-from" class="unit-select">
+                            
                         </select>
                         <div class="convert-field-value" id="convert-input-display">0</div>
                     </div>
@@ -97,33 +95,31 @@
                     <div class="convert-divider">↓</div>
 
                     <div class="convert-field-row">
-                        <select id="unit-to" class="unit-select" onchange="convertValue()">
-                            <option value="m">m</option>
-                            <option value="cm">cm</option>
-                            <option value="km">km</option>
+                        <select id="unit-to" class="unit-select">
+
                         </select>
                         <div class="convert-field-value convert-result" id="convert-result-display">0</div>
                     </div>
                 </div>
             </div>
             <div class="buttons-grid converter-grid">
-                <button class="btn btn-action" onclick="clearDisplay()">C</button>
-                <button class="btn btn-action" onclick="backspace()">⌫</button>
-                <button class="btn btn-action" onclick="appendDecimal('.')">.</button>
+                <button class="btn btn-action" id="clear-display">C</button>
+                <button class="btn btn-action" id="backspace">⌫</button>
+                <button class="btn btn-action" id="append-decimal">.</button>
 
-                <button class="btn" onclick="appendNumber('7')">7</button>
-                <button class="btn" onclick="appendNumber('8')">8</button>
-                <button class="btn" onclick="appendNumber('9')">9</button>
+                <button class="btn btn-number">7</button>
+                <button class="btn btn-number">8</button>
+                <button class="btn btn-number">9</button>
 
-                <button class="btn" onclick="appendNumber('4')">4</button>
-                <button class="btn" onclick="appendNumber('5')">5</button>
-                <button class="btn" onclick="appendNumber('6')">6</button>
+                <button class="btn btn-number">4</button>
+                <button class="btn btn-number">5</button>
+                <button class="btn btn-number">6</button>
 
-                <button class="btn" onclick="appendNumber('1')">1</button>
-                <button class="btn" onclick="appendNumber('2')">2</button>
-                <button class="btn" onclick="appendNumber('3')">3</button>
+                <button class="btn btn-number">1</button>
+                <button class="btn btn-number">2</button>
+                <button class="btn btn-number">3</button>
 
-                <button class="btn btn-zero" onclick="appendNumber('0')">0</button>
+                <button class="btn btn-number">0</button>
             </div>
         </div>
 

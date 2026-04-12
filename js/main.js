@@ -3,20 +3,13 @@ const sideDrawer = document.getElementById('sideDrawer');
 const overlay = document.getElementById('drawerOverlay');
 const mainDisplay = document.querySelector('.display-wrapper');
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    sideDrawer.classList.toggle('open');
-    overlay.classList.toggle('visible');
-});
+const standardCalculator = new StandardCalculator();
+const converter = new Converter();
+const programmerCalculator = new ProgrammerCalculator();
 
-overlay.addEventListener('click', closeDrawer);
-
-function initStandardCalculator() {
+function attachEventListenersForStandard() {
     const standardModule = document.getElementById('standard-module');
-    standardModule.style.display = 'block';
-    mainDisplay.style.display = 'flex';
 
-    const standardCalculator = new StandardCalculator();
     standardModule.querySelectorAll('.btn-number').forEach(btn => {
         btn.addEventListener('click', () => standardCalculator.appendNumber(btn.textContent));
     });
@@ -44,7 +37,47 @@ function initStandardCalculator() {
     standardModule.querySelector('.btn-decimal').addEventListener('click', () => standardCalculator.appendDecimal());
 }
 
-initStandardCalculator();
+function attachEventListenersForConverter() {
+    const converterModule = document.getElementById('converter-module');
+
+    converterModule.querySelectorAll('.btn-number').forEach(btn => {
+        btn.addEventListener('click', () => converter.appendNumber(btn.textContent));
+    });
+
+    converterModule.querySelector('#clear-display').addEventListener('click', () => converter.clearDisplay());
+    converterModule.querySelector('#backspace').addEventListener('click', () => converter.backspace());
+    converterModule.querySelector('#append-decimal').addEventListener('click', () => converter.appendDecimal());
+}
+
+function attachEventListenersForProgrammer() {
+    const programmerModule = document.getElementById('programmer-module');
+            
+    programmerCalculator.updateKeypad('DEC');      
+    
+    programmerModule.querySelectorAll('.hex-btn, .digit-dec, .digit-bin').forEach(btn => {
+        btn.addEventListener('click', () => programmerCalculator.appendNumber(btn.textContent));
+    });
+
+    programmerModule.querySelectorAll('.btn-operator').forEach(btn => {
+        btn.addEventListener('click', () => programmerCalculator.setOperator(btn.textContent));
+    });
+
+    programmerModule.querySelector('#clear-display').addEventListener('click', () => programmerCalculator.clearDisplay());
+    programmerModule.querySelector('#backspace').addEventListener('click', () => programmerCalculator.backspace());
+    programmerModule.querySelector('#calculate').addEventListener('click', () => programmerCalculator.calculate());
+}
+
+attachEventListenersForStandard();
+attachEventListenersForConverter();
+attachEventListenersForProgrammer();
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    sideDrawer.classList.toggle('open');
+    overlay.classList.toggle('visible');
+});
+
+overlay.addEventListener('click', closeDrawer);
 
 document.querySelectorAll('.drawer-menu li').forEach((item, index) => {
     item.addEventListener('click', () => {
@@ -60,35 +93,22 @@ document.querySelectorAll('.drawer-menu li').forEach((item, index) => {
         document.querySelectorAll('.mode-module').forEach(mod => mod.style.display = 'none');
         
         if (modeName === 'Standard') {
-            initStandardCalculator();
+            document.getElementById('standard-module').style.display = 'block';
+            mainDisplay.style.display = 'flex';
+
+            standardCalculator.reset();
         } else if (modeName === 'Converter') {
             document.getElementById('converter-module').style.display = 'block';
             mainDisplay.style.display = 'none';
-            
-            const converter = new Converter();
+
+            converter.reset();
         } else if (modeName === 'Programmer') {
-            const programmerModule = document.getElementById('programmer-module');
-            programmerModule.style.display = 'block';
+            document.getElementById('programmer-module').style.display = 'block';
             mainDisplay.style.display = 'flex';
-            
-            const programmerCalculator = new ProgrammerCalculator();
-            programmerCalculator.updateKeypad('DEC');      
-            
-            programmerModule.querySelectorAll('.hex-btn, .digit-dec, .digit-bin').forEach(btn => {
-                btn.addEventListener('click', () => programmerCalculator.appendNumber(btn.textContent));
-            });
 
-            programmerModule.querySelectorAll('.btn-operator').forEach(btn => {
-                btn.addEventListener('click', () => programmerCalculator.setOperator(btn.textContent));
-            });
+            programmerCalculator.reset();
+        }  
 
-            programmerModule.querySelector('#clear-display').addEventListener('click', () => programmerCalculator.clearDisplay());
-            programmerModule.querySelector('#backspace').addEventListener('click', () => programmerCalculator.backspace());
-            programmerModule.querySelector('#prog-decimal').addEventListener('click', () => {
-                programmerCalculator.appendDecimal();
-            });
-            programmerModule.querySelector('#calculate').addEventListener('click', () => programmerCalculator.calculate());
-        }      
         closeDrawer(); 
     });
 });
