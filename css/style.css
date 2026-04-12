@@ -201,6 +201,22 @@ body {
     min-height: 22px;
     word-break: break-all;
     letter-spacing: 0.03em;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scrollbar-width: thin;
+    scrollbar-color: var(--btn-border) transparent;
+}
+
+.history-field::-webkit-scrollbar {
+    height: 3px;
+}
+.history-field::-webkit-scrollbar-track {
+    background: transparent;
+}
+.history-field::-webkit-scrollbar-thumb {
+    background: var(--btn-border);
+    border-radius: 2px;
 }
 
 .display-field {
