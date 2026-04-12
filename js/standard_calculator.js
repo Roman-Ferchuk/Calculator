@@ -187,7 +187,7 @@ class StandardCalculator {
     memoryRecall() {
         if (!this.hasMemory) return;
         this.state.currentInput = this.memoryValue.toString();
-        this.state.shouldResetScreen = true;
+        this.shouldResetScreen = true;
         this.updateDisplay();
     }
 
@@ -246,5 +246,14 @@ class StandardCalculator {
             }
             return item;
         }).join(' ');
+    }
+
+    reset() {
+        this.state.currentInput = '';
+        this.state.expression = [];
+        this.memoryValue = 0;
+        this.hasMemory = false;
+        this.shouldResetScreen = false;
+        this.updateDisplay();
     }
 }

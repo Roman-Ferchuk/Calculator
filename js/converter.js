@@ -67,7 +67,7 @@ class Converter {
     clearDisplay() {
         this.currentInput = '';
         this.updateInputDisplay();
-        this.updateResultDisplay(0);
+        this.calculate();
     }
 
     backspace() {
@@ -79,11 +79,6 @@ class Converter {
     }
 
     appendNumber(number) {
-        if (this.shouldResetScreen) {
-            this.currentInput = '';
-            this.shouldResetScreen = false;
-        }
-
         if (this.currentInput === '0' && number === '0') return;
         if (this.currentInput === '0' && number !== '0') this.currentInput = '';
 
@@ -139,5 +134,11 @@ class Converter {
         }
 
         this.resultDisplay.textContent = formattedResult;
+    }
+
+    reset() {
+        this.currentInput = '';
+        this.updateInputDisplay();
+        this.calculate();
     }
 }

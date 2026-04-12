@@ -175,12 +175,20 @@ class ProgrammerCalculator {
             let operator = tempExpr[i];
             let nextVal = tempExpr[i+1];
             if (operator === '+') result += nextVal;
-            if (operator === '-') result -= nextVal;
+            if (operator === '−' || operator === '-') result -= nextVal;
         }
 
         this.state.currentInput = result.toString(currentBase).toUpperCase();
         this.state.expression = []; 
         this.shouldResetScreen = true;
         this.updateDisplay(this.currentSystem);
+    }
+
+    reset() {
+        this.state.currentInput = '';
+        this.state.expression = [];
+        this.shouldResetScreen = false;
+        this.updateDisplay(this.currentSystem);
+        this.currentSystem = 'DEC';
     }
 }

@@ -78,7 +78,7 @@
 
         <div id="converter-module" class="mode-module" style="display: none;">
             <div class="converter-ui">
-                <select id="convert-category" class="calc-select" onchange="updateUnits()">
+                <select id="convert-category" class="calc-select">
                     <option value="length">Length</option>
                     <option value="weight">Weight</option>
                     <option value="area">Area</option>
@@ -86,10 +86,8 @@
 
                 <div class="convert-fields">
                     <div class="convert-field-row">
-                        <select id="unit-from" class="unit-select" onchange="convertValue()">
-                            <option value="cm">cm</option>
-                            <option value="m">m</option>
-                            <option value="km">km</option>
+                        <select id="unit-from" class="unit-select">
+                            
                         </select>
                         <div class="convert-field-value" id="convert-input-display">0</div>
                     </div>
@@ -97,10 +95,8 @@
                     <div class="convert-divider">↓</div>
 
                     <div class="convert-field-row">
-                        <select id="unit-to" class="unit-select" onchange="convertValue()">
-                            <!-- <option value="m">m</option>
-                            <option value="cm">cm</option>
-                            <option value="km">km</option> -->
+                        <select id="unit-to" class="unit-select">
+
                         </select>
                         <div class="convert-field-value convert-result" id="convert-result-display">0</div>
                     </div>
