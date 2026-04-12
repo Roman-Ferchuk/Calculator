@@ -78,25 +78,23 @@ class ProgrammerCalculator {
 
         if (this.state.currentInput !== '') {
             const val = parseInt(this.state.currentInput, currentBase);
-            
             if (!isNaN(val)) {
                 this.state.expression.push(val);
+                this.state.currentInput = ''; 
             }
-            this.state.currentInput = '';
-        } else if (this.state.expression.length === 0) {
+        } 
+        else if (this.state.expression.length === 0) {
             this.state.expression.push(0);
         }
 
-        const lastItem = this.state.expression[this.state.expression.length - 1];
-        if (typeof lastItem === 'string') {
-            this.state.expression[this.state.expression.length - 1] = operator;
+        const lastIndex = this.state.expression.length - 1;
+        if (typeof this.state.expression[lastIndex] === 'string') {
+            this.state.expression[lastIndex] = operator;
         } else {
             this.state.expression.push(operator);
         }
 
         console.log('Current expression:', this.state.expression);
-        
-        this.updateDisplay(this.currentSystem); 
     }
 
     updateDisplay(newMode) {
@@ -104,28 +102,22 @@ class ProgrammerCalculator {
         const oldBase = bases[this.currentSystem];
         const newBase = bases[newMode];
 
-        let numericValue = 0;
+        let activeValue = 0;
         if (this.state.currentInput !== '') {
-            numericValue = parseInt(this.state.currentInput, oldBase);
+            activeValue = parseInt(this.state.currentInput, oldBase);
+        } else {
+            activeValue = [...this.state.expression].reverse().find(item => typeof item === 'number') || 0;
         }
-        if (isNaN(numericValue)) numericValue = 0;
+        if (isNaN(activeValue)) activeValue = 0;
 
-        this.decVal.innerText = numericValue.toString(10);
-        this.binVal.innerText = numericValue.toString(2);
-        this.hexVal.innerText = numericValue.toString(16).toUpperCase();
+        this.decVal.innerText = activeValue.toString(10);
+        this.binVal.innerText = activeValue.toString(2);
+        this.hexVal.innerText = activeValue.toString(16).toUpperCase();
 
         if (newMode !== this.currentSystem) {
             if (this.state.currentInput !== '') {
-                this.state.currentInput = numericValue.toString(newBase).toUpperCase();
+                this.state.currentInput = activeValue.toString(newBase).toUpperCase();
             }
-
-            this.state.expression = this.state.expression.map(item => {
-                if (typeof item === 'number') {
-                    return item; 
-                }
-                return item;
-            });
-
             this.currentSystem = newMode;
         }
 
@@ -153,7 +145,16 @@ class ProgrammerCalculator {
             this.state.expression.pop();
         }
 
-        if (this.state.expression.length < 3) return;
+        if (this.state.expression.length < 3) {
+            if (this.state.expression.length >= 1 && typeof this.state.expression[0] === 'number') {
+                const currentBase = bases[this.currentSystem];
+                this.state.currentInput = this.state.expression[0].toString(currentBase).toUpperCase();
+                this.state.expression = [];
+                this.shouldResetScreen = true;
+                this.updateDisplay(this.currentSystem);
+            }
+            return;
+        }
 
         let tempExpr = [...this.state.expression];
         
@@ -203,7 +204,7 @@ class ProgrammerCalculator {
         this.updateDisplay(this.currentSystem);
         this.currentSystem = 'DEC'; 
     }
-  
+
     appendDecimal() {
         if (this.currentSystem !== 'DEC') return; 
         if (this.state.currentInput.includes('.')) return;

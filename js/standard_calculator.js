@@ -91,8 +91,16 @@ class StandardCalculator {
             this.state.expression.pop();
         }
         
-        if (this.state.expression.length < 3) return;
- 
+        if (this.state.expression.length < 3) {
+            if (this.state.expression.length >= 1 && typeof this.state.expression[0] === 'number') {
+                this.state.currentInput = this.state.expression[0].toString();
+                this.state.expression = [];
+                this.shouldResetScreen = true; 
+                this.updateDisplay();
+            }
+            return;
+        }
+
         for (let i = 0; i < this.state.expression.length; i++) {
             if (this.state.expression[i] === '^') {
                 if (i > 0 && i < this.state.expression.length - 1) {

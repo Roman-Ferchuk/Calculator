@@ -31,11 +31,39 @@
     color: var(--text-mid);
     padding: 4px 8px;
     border-radius: 4px;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    overflow: hidden; 
 }
 
 .sys-item.active {
     background: var(--btn-border);
     color: white;
+}
+
+.sys-item span {
+    overflow-x: auto;
+    white-space: nowrap;
+    flex: 1;
+    text-align: right;
+    scrollbar-width: thin;
+    scrollbar-color: var(--btn-border) transparent;
+}
+
+.sys-item span::-webkit-scrollbar {
+    height: 4px; 
+}
+
+.sys-item span::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+.sys-item span::-webkit-scrollbar-thumb {
+    background-color: var(--btn-border); 
+    border-radius: 10px;
 }
 
 .programmer-grid {
