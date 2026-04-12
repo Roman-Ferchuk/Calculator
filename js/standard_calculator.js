@@ -8,7 +8,6 @@ class StandardCalculator {
 
         this.memoryValue = 0;
         this.hasMemory = false;
-        this.shouldResetScreen = false;
     }
 
     clearDisplay() {
@@ -35,9 +34,9 @@ class StandardCalculator {
     }
 
     appendNumber(number) {
-        if (this.state.shouldResetScreen) {
+        if (this.shouldResetScreen) {
             this.state.currentInput = '';
-            this.state.shouldResetScreen = false;
+            this.shouldResetScreen = false;
         }
 
         if (this.state.currentInput === '0' && number === '0') return;
@@ -153,7 +152,7 @@ class StandardCalculator {
     }
 
     updateMemoryIndicator() {
-        const btn = this.calculatorBlock.getElementById('memory-recall');
+        const btn = document.getElementById('standard-module').querySelector('#memory-recall');
 
         if (btn) {
             btn.style.outline = this.hasMemory ? '2px solid var(--btn-border)' : 'none';

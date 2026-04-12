@@ -62,10 +62,19 @@ document.querySelectorAll('.drawer-menu li').forEach((item, index) => {
         if (modeName === 'Standard') {
             initStandardCalculator();
         } else if (modeName === 'Converter') {
-            document.getElementById('converter-module').style.display = 'block';
+            const converterModule = document.getElementById('converter-module');
+            converterModule.style.display = 'block';
             mainDisplay.style.display = 'none';
             
             const converter = new Converter();
+
+            converterModule.querySelectorAll('.btn-number').forEach(btn => {
+                btn.addEventListener('click', () => converter.appendNumber(btn.textContent));
+            });
+
+            converterModule.querySelector('#clear-display').addEventListener('click', () => converter.clearDisplay());
+            converterModule.querySelector('#backspace').addEventListener('click', () => converter.backspace());
+            converterModule.querySelector('#append-decimal').addEventListener('click', () => converter.appendDecimal());
         } else if (modeName === 'Programmer') {
             const programmerModule = document.getElementById('programmer-module');
             programmerModule.style.display = 'block';

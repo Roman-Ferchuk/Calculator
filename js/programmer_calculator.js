@@ -164,7 +164,7 @@ class ProgrammerCalculator {
                     this.clearDisplay();
                     return;
                 }
-                tempExpr[i-1] = Math.floor(tempExpr[i-1] / tempExpr[i+1]); // Цілочисельне ділення для програмістів
+                tempExpr[i-1] = Math.floor(tempExpr[i-1] / tempExpr[i+1]); 
                 tempExpr.splice(i, 2);
                 i--;
             }
