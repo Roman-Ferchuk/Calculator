@@ -61,7 +61,7 @@ class Converter {
             this.unitToSelect.value = units[1];
         }
  
-        this.calculate();
+        this.reset();
     }
 
     clearDisplay() {
