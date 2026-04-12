@@ -143,6 +143,13 @@ class StandardCalculator {
         if (this.state.expression.length > 0) {
             let finalResult = this.state.expression[0];
             finalResult = parseFloat(finalResult.toPrecision(12));
+            const error = this.state.validateResult(finalResult);
+            if (error) {
+                this.state.expression = [];
+                this.state.currentInput = '';
+                this.display.textContent = error;
+                return;
+            }
             this.state.currentInput = finalResult.toString();
         }
  
@@ -210,6 +217,16 @@ class StandardCalculator {
         let result = 1;
         for (let i = 1; i <= value; i++) {
             result *= i;
+            if (!isFinite(result)) {
+                this.display.textContent = 'Overflow';
+                return;
+            }
+        }
+
+        const error = this.state.validateResult(result);
+        if (error) {
+            this.display.textContent = error;
+            return;
         }
 
         this.state.currentInput = result.toString();
@@ -220,6 +237,12 @@ class StandardCalculator {
         if (this.state.currentInput === '') return;
 
         let value = parseFloat(this.state.currentInput);
+        const result = value * value;
+        const error = this.state.validateResult(result);
+        if (error) {
+            this.display.textContent = error;
+            return;
+        }
         this.state.currentInput = (value * value).toString();
         this.updateDisplay();
     }
@@ -232,7 +255,12 @@ class StandardCalculator {
             alert('Square root is not defined for negative numbers.');
             return;
         }
-
+        const result = Math.sqrt(value);
+        const error = this.state.validateResult(result);
+        if (error) {
+            this.display.textContent = error;
+            return;
+        }
         this.state.currentInput = Math.sqrt(value).toString();
         this.updateDisplay();
     }

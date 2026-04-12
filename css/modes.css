@@ -52,6 +52,11 @@
     cursor: not-allowed;
 }
 
+.digit-dot:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 .converter-ui {
     padding-bottom: 10px;
 }
