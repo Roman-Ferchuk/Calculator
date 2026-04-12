@@ -321,6 +321,25 @@ body {
     transform: scale(0.94);
 }
 
+#copy-history {
+    transition: transform 0.2s ease;
+}
+#copy-history:hover {
+    transform: scale(1.2);
+}
+#copy-history {
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    margin-left: 10px; 
+    font-size: 14px;
+}
+.history-container {
+    display: flex; 
+    align-items: center; 
+    justify-content: flex-end;
+}
+
 @media (max-width: 380px) {
     .calculator { width: 100%; }
     .display-field { font-size: 2.4rem; }

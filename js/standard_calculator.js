@@ -284,4 +284,59 @@ class StandardCalculator {
         this.shouldResetScreen = false;
         this.updateDisplay();
     }
+
+    handlePaste(text) {
+        let cleanText = text.trim()
+            .replace(',', '.')
+            .replace('−', '-')
+            .replace('×', '*')
+            .replace('÷', '/');
+
+        if (!isNaN(parseFloat(cleanText)) && isFinite(cleanText) && !/[+\-*/^]/.test(cleanText)) {
+            this.state.currentInput = cleanText;
+            this.shouldResetScreen = false;
+            this.updateDisplay();
+            return;
+        }
+
+        try {
+            const tokens = cleanText.split(/([+\-*/^])|(\d+\.?\d*)/).filter(t => t && t.trim() !== '');
+
+            this.state.expression = [];
+            this.state.currentInput = '';
+
+            tokens.forEach(token => {
+                if (!isNaN(parseFloat(token))) {
+                    this.state.expression.push(Number(token));
+                } else {
+                    let op = token;
+                    if (op === '*') op = '×';
+                    if (op === '/') op = '÷';
+                    if (op === '-') op = '−';
+                    this.state.expression.push(op);
+                }
+            });
+
+            if (typeof this.state.expression[this.state.expression.length - 1] === 'number') {
+                this.state.currentInput = this.state.expression.pop().toString();
+            }
+
+            this.updateDisplay();
+        } catch (e) {
+            console.error("Expression could not be parsed", e);
+        }
+    }
+
+    copyHistory() {
+        const historyText = this.historyDisplay.textContent;
+        if (historyText) {
+            navigator.clipboard.writeText(historyText)
+                .then(() => {
+                    const originalColor = this.historyDisplay.style.color;
+                    this.historyDisplay.style.color = "#ff99cc"; // "Pick-me" рожевий
+                    setTimeout(() => this.historyDisplay.style.color = originalColor, 500);
+                })
+                .catch(err => console.error('Error copying:', err));
+        }
+    }
 }
