@@ -225,7 +225,7 @@ class ProgrammerCalculator {
         }
 
         if (!validPattern.test(cleanText)) {
-            alert(`Текст містить символи, недопустимі для режиму ${this.currentSystem}`);
+            alert(`The text contains characters that are not allowed for the mode ${this.currentSystem}`);
             return;
         }
 
