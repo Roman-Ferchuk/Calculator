@@ -317,7 +317,7 @@ body {
 .btn-operator:hover  { background: var(--operator-hover); }
 .btn-operator:active { background: var(--operator-active); }
 
-.btn-zero {
+.btn-2 {
     grid-column: span 2;
 }
 
