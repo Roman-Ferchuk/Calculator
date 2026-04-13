@@ -155,3 +155,26 @@
 .converter-grid .btn-zero {
     grid-column: auto;   
 }
+
+#caffeine-module .convert-field-value {
+    flex: none;
+    width: 130px;
+    margin-left: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    text-overflow: clip; 
+    scrollbar-width: thin;
+    scrollbar-color: var(--btn-border) transparent;
+}
+#caffeine-module .convert-field-value::-webkit-scrollbar { height: 3px; }
+#caffeine-module .convert-field-value::-webkit-scrollbar-track { background: transparent; }
+#caffeine-module .convert-field-value::-webkit-scrollbar-thumb {
+    background: var(--btn-border);
+    border-radius: 2px;
+}
+
+#caffeine-module .unit-select {
+    flex: none;
+    width: 68px;
+}

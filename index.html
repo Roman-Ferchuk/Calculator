@@ -18,6 +18,7 @@
             <li class="active">Standard</li>
             <li class="drawer-item">Converter</li>
             <li class="drawer-item">Programmer</li>
+            <li class="drawer-item">Caffeine</li>
         </ul>
     </div>
 
@@ -163,6 +164,59 @@
                 <button class="btn btn-equals btn-2" id="calculate">=</button>
             </div>
         </div>
+
+        <div id="caffeine-module" class="mode-module" style="display: none;">
+            <div class="convert-fields">
+                <div class="convert-field-row">
+                    <div class="field-label">Weight:</div>
+                    <select id="weight-unit" class="unit-select">
+                        <option value="kg">kg</option>
+                        <option value="lb">lb</option>
+                    </select>
+                    <div class="convert-field-value chosen-input-display" id="weight-input-display">0</div>
+                </div>
+
+                <div class="convert-field-row">
+                    <div class="field-label">Coffee consumed (cups):</div>
+                    <div class="convert-field-value" id="caffeine-input-display">0 (0 mg)</div>
+                </div>
+
+                <div class="convert-field-row">
+                    <div class="field-label">Recommended max (mg):</div>
+                    <div class="convert-field-value convert-result" id="max-caffeine-result-display">0</div>
+                </div>
+
+                <div class="convert-field-row">
+                    <div class="field-label">Caffeine left today (mg):</div>
+                    <div class="convert-field-value convert-result" id="caffeine-left-result-display">0</div>
+                </div>
+
+                <div class="convert-field-row">
+                    <div class="field-label">That's about:</div>
+                    <div class="convert-field-value convert-result" id="cups-left-result-display">0 ☕</div>
+                </div>
+            </div>
+
+            <div class="buttons-grid converter-grid">
+                <button class="btn btn-action" id="clear-display">C</button>
+                <button class="btn btn-action" id="backspace">⌫</button>
+                <button class="btn btn-action" id="append-decimal">.</button>
+
+                <button class="btn btn-number">7</button>
+                <button class="btn btn-number">8</button>
+                <button class="btn btn-number">9</button>
+
+                <button class="btn btn-number">4</button>
+                <button class="btn btn-number">5</button>
+                <button class="btn btn-number">6</button>
+
+                <button class="btn btn-number">1</button>
+                <button class="btn btn-number">2</button>
+                <button class="btn btn-number">3</button>
+
+                <button class="btn btn-number">0</button>
+            </div>
+        </div>
     </div>
 
     <script src="js/calculator_engine.js"></script>
@@ -170,6 +224,7 @@
     <script src="js/standard_calculator.js"></script>
     <script src="js/programmer_calculator.js"></script>
     <script src="js/converter.js"></script>
+    <script src="js/caffeine_calculator.js"></script>
 
     <script src="js/main.js"></script>
 </body>
