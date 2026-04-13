@@ -9,6 +9,7 @@ class CaffeineCalculator {
         this.caffeineInputDisplay = document.getElementById('caffeine-input-display');
         this.maxCaffeineResultDisplay = document.getElementById('max-caffeine-result-display');
         this.caffeineLeftResultDisplay = document.getElementById('caffeine-left-result-display');
+        this.cupsLeftResultDisplay = document.getElementById('cups-left-result-display');
 
         this.weightUnitSelect = document.getElementById('weight-unit');
     }
@@ -119,7 +120,14 @@ class CaffeineCalculator {
 
     updateResultDisplay(maxCaffeine) {
         this.maxCaffeineResultDisplay.textContent = maxCaffeine;
-        this.caffeineLeftResultDisplay.textContent = maxCaffeine ? (Number(maxCaffeine) - Number(this.currentCaffeineInput)).toString() : 0;
+        const consumedMg = Number(this.currentCaffeineInput) * 95;
+        
+        const caffeineLeft = maxCaffeine
+            ? (Number(maxCaffeine) - consumedMg)
+            : 0;
+        this.caffeineLeftResultDisplay.textContent = caffeineLeft.toFixed(1).replace('.0', '');
+        const cups = caffeineLeft > 0 ? Math.floor(caffeineLeft / 95) : 0;
+        this.cupsLeftResultDisplay.textContent = `${cups} ☕`;
     }
 
     updateWeightInputDisplay() {
@@ -127,6 +135,10 @@ class CaffeineCalculator {
     }
 
     updateCaffeineInputDisplay() {
-        this.caffeineInputDisplay.textContent = this.currentCaffeineInput === '' ? 0 : this.currentCaffeineInput;
+        const cups = this.currentCaffeineInput === '' ? '0' : this.currentCaffeineInput;
+        
+        const mg = Math.round(Number(cups) * 95);
+        
+        this.caffeineInputDisplay.textContent = `${cups}(${mg} mg)`;
     }
 }
