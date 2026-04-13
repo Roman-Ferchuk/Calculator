@@ -17,6 +17,9 @@ class StandardCalculator {
     }
 
     setOperator(operator) {
+        if (!this.validatePower())
+            return;
+
         if (this.state.currentInput !== '') {
             this.state.expression.push(Number(this.state.currentInput));
             this.state.currentInput = '';
@@ -80,6 +83,9 @@ class StandardCalculator {
     }
 
     calculate() {
+        if (!this.validatePower())
+            return;
+
         if (this.state.expression.length === 0) return;
  
         if (this.state.currentInput !== '') {
@@ -344,5 +350,17 @@ class StandardCalculator {
                 })
                 .catch(err => console.error('Error copying:', err));
         }
+    }
+
+    validatePower() {
+        let prevNumber = Number(this.state.expression[this.state.expression.length - 2]);
+        let prevOperator = this.state.expression[this.state.expression.length - 1];
+        let currentNumber = Number(this.state.currentInput);
+        if (prevNumber < 0 && prevOperator === '^' && currentNumber < 1) {
+            alert('Error: It is impossible to raise a negative number to a fractional power!');
+            return false;
+        }
+
+        return true;
     }
 }

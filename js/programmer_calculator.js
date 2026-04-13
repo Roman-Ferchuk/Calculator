@@ -99,9 +99,8 @@ class ProgrammerCalculator {
         let activeValue = 0;
         if (this.state.currentInput !== '') {
             activeValue = parseInt(this.state.currentInput, oldBase);
-        } else {
-            activeValue = [...this.state.expression].reverse().find(item => typeof item === 'number') || 0;
-        }
+        } 
+        
         if (isNaN(activeValue)) activeValue = 0;
 
         this.decVal.innerText = activeValue.toString(10);
