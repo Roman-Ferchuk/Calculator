@@ -29,8 +29,6 @@ class StandardCalculator {
         } else if (this.state.expression.length > 0) {
             this.state.expression.push(operator);
         }
-        
-        console.log('Current expression:', this.state.expression);
     }
 
     appendNumber(number) {
@@ -121,7 +119,7 @@ class StandardCalculator {
             } else if (this.state.expression[i] === '÷') {
                 if (i > 0 && i < this.state.expression.length - 1) {
                     if (this.state.expression[i + 1] === 0) {
-                        alert('Неможливо ділити на нуль!');
+                        alert('It is impossible to divide by zero!');
                         this.clearDisplay();
                         return;
                     }

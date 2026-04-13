@@ -89,8 +89,6 @@ class ProgrammerCalculator {
         } else {
             this.state.expression.push(operator);
         }
-
-        console.log('Current expression:', this.state.expression);
     }
 
     updateDisplay(newMode) {

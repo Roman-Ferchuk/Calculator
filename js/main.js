@@ -6,6 +6,7 @@ const mainDisplay = document.querySelector('.display-wrapper');
 const standardCalculator = new StandardCalculator();
 const converter = new Converter();
 const programmerCalculator = new ProgrammerCalculator();
+const caffeineCalculator = new CaffeineCalculator();
 
 function attachEventListenersForStandard() {
     const standardModule = document.getElementById('standard-module');
@@ -67,9 +68,26 @@ function attachEventListenersForProgrammer() {
     programmerModule.querySelector('#calculate').addEventListener('click', () => programmerCalculator.calculate());
 }
 
+function attachEventListenersForCaffeine() {
+    const caffeineModule = document.getElementById('caffeine-module');
+
+    caffeineModule.querySelectorAll('.btn-number').forEach(btn => {
+        btn.addEventListener('click', () => caffeineCalculator.appendNumber(btn.textContent));
+    });
+
+    caffeineModule.querySelector('#weight-input-display').addEventListener('click', () => caffeineCalculator.setActiveForInput('weight'));
+    caffeineModule.querySelector('#caffeine-input-display').addEventListener('click', () => caffeineCalculator.setActiveForInput('caffeine'));
+
+    caffeineModule.querySelector('#weight-unit').addEventListener('change', () => caffeineCalculator.selectWeightSystem(caffeineModule.querySelector('#weight-unit').value));
+    caffeineModule.querySelector('#clear-display').addEventListener('click', () => caffeineCalculator.clearDisplay());
+    caffeineModule.querySelector('#backspace').addEventListener('click', () => caffeineCalculator.backspace());
+    caffeineModule.querySelector('#append-decimal').addEventListener('click', () => caffeineCalculator.appendDecimal());
+}
+
 attachEventListenersForStandard();
 attachEventListenersForConverter();
 attachEventListenersForProgrammer();
+attachEventListenersForCaffeine();
 
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
@@ -128,7 +146,10 @@ document.querySelectorAll('.drawer-menu li').forEach((item, index) => {
             mainDisplay.style.display = 'flex';
 
             programmerCalculator.reset();
-        }  
+        } else if (modeName === 'Caffeine') {
+            document.getElementById('caffeine-module').style.display = 'block';
+            mainDisplay.style.display = 'none';
+        }
 
         closeDrawer(); 
     });
